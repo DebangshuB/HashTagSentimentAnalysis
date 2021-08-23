@@ -1,0 +1,16 @@
+{
+  "name": "hashtagdeploy",
+  "version": "1.0.0",
+  "description": "Twitter Sentiment Analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Debangshu Bhattacharjee",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "python-shell": "^3.0.0"
+  }
+}

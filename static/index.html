@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Twitter Sentiment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23efefef%22></rect><path fill=%22%23242020%22 d=%22M79.58 39.51L67.95 39.51L63.85 59.12L79.36 59.12Q79.58 59.80 79.81 60.66Q80.04 61.51 80.04 62.54L80.04 62.54Q80.04 66.19 76.16 66.19L76.16 66.19L62.37 66.19L58.49 85.00Q57.92 85.11 57.18 85.17Q56.44 85.23 55.64 85.23L55.64 85.23Q53.82 85.23 52.74 84.37Q51.65 83.52 51.65 81.58L51.65 81.58Q51.65 80.44 51.99 78.79Q52.34 77.13 52.56 75.99L52.56 75.99L54.62 66.19L37.74 66.19L33.87 85.00Q33.30 85.11 32.56 85.17Q31.82 85.23 31.02 85.23L31.02 85.23Q29.19 85.23 28.11 84.37Q27.03 83.52 27.03 81.58L27.03 81.58Q27.03 80.44 27.37 78.79Q27.71 77.13 28.05 75.99L28.05 75.99L30.11 66.19L17.22 66.19Q17.00 65.50 16.77 64.65Q16.54 63.79 16.54 62.88L16.54 62.88Q16.54 59.12 20.30 59.12L20.30 59.12L31.59 59.12L35.69 39.51L20.64 39.51Q20.42 38.83 20.13 38.03Q19.85 37.23 19.85 36.21L19.85 36.21Q19.85 32.44 23.72 32.44L23.72 32.44L37.17 32.44L40.82 15.00Q41.39 14.89 42.19 14.83Q42.99 14.77 43.67 14.77L43.67 14.77Q45.50 14.77 46.58 15.63Q47.66 16.48 47.66 18.42L47.66 18.42Q47.66 19.56 47.26 21.16Q46.86 22.75 46.64 24.01L46.64 24.01L44.81 32.44L61.68 32.44L65.45 15.00Q66.02 14.89 66.81 14.83Q67.61 14.77 68.30 14.77L68.30 14.77Q70.12 14.77 71.20 15.63Q72.29 16.48 72.29 18.42L72.29 18.42Q72.29 19.56 71.89 21.16Q71.49 22.75 71.26 24.01L71.26 24.01L69.44 32.44L82.77 32.44Q83.00 33.13 83.23 33.98Q83.46 34.84 83.46 35.86L83.46 35.86Q83.46 39.51 79.58 39.51L79.58 39.51ZM43.33 39.51L39.23 59.12L56.10 59.12L60.20 39.51L43.33 39.51Z%22></path></svg>"
+    />
+
+</head>
+
+<body>
+    <div class='main-container'>
+        <div class="header-container">
+            <h1 class='header'>#Tag Sentiment Analysis</h1>
+        </div>
+        <div class="input-search">
+            <input id='input_text' type='text' placeholder="Type your keyword" required>
+            <button type="submit" onclick="myFunction()">Search</button>
+        </div>
+
+        <div id='loading' class='res-area' style="display:none">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div id='results' class='res-area' style="display:none">
+
+
+            <div class="chart-area">
+                <div class="charts">
+                    <div class="avg-sentiment">
+                        <h4>Average Sentiment</h4>
+                        <h1 id='avg-sentiment-num'>00.00%</h1>
+                        <h2 id='avg-sentiment-text'>ERROR</h2>
+                    </div>
+                </div>
+                <div class="charts">
+                    <canvas id='chart-pie'></canvas>
+                </div>
+            </div>
+            <hr>
+            <div class="number-area">
+                <div class="number">
+                    <div class="num-result" id='num-result-positive'>00</div>
+                    <div class="num-tag">Positive</div>
+                </div>
+                <div class="number">
+                    <div class="num-result" id='num-result-neutral'>00</div>
+                    <div class="num-tag">Neutral</div>
+                </div>
+                <div class="number">
+                    <div class="num-result" id='num-result-negative'>00</div>
+                    <div class='num-tag'>Negative</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

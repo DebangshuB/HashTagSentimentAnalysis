@@ -43,6 +43,9 @@ Live predictions used tweepy to get tweets.
 
 
 ## Backend and Frontend
-Backend using Nodejs and Express. [Python-shell](https://www.npmjs.com/package/python-shell) to run the python script for predictions.
+Backend using Python and Flask.
 
 Frontend made of basic of HTML, CSS and JS with Chart.js.
+
+## Deployment
+Deployed on [Heroku](https://hastag-sentiment-analysis.herokuapp.com/).

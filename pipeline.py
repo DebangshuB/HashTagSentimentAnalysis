@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 # Imported for DL
 import tensorflow as tf
@@ -20,12 +18,11 @@ import os
 # Impoorted For Scraping Tweets
 import tweepy
 
-
 # Set-up for Tweepy
-consumer_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-consumer_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-access_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-access_token_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+consumer_key = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+consumer_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+access_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+access_token_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -35,7 +32,7 @@ api = tweepy.API(auth)
 path = os.path.dirname(os.path.abspath(__file__))
 
 # Setting up parameters for preprocessing
-f = open(os.path.join(path, 'parameters.json'))
+f = open(os.path.join(path, './static/parameters.json'))
 parameters = json.load(f)
 
 max_padding_length = parameters['max_len']
@@ -57,7 +54,7 @@ model.add(tf.keras.layers.Dense(32, activation='relu'))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
 # Loading Weights
-model.load_weights(os.path.join(path, './weights/'))
+model.load_weights(os.path.join(path, './static/weights/'))
 
 # Function for Preprocessing
 
@@ -99,43 +96,30 @@ def process_text(text):
     return text
 
 
-# In[2]:
+def work(number_of_tweets, topic):
+    # Actual Code
+    tweets_ = []
+    tweets = []
+    y_pred = []
 
+    for tweet in tweepy.Cursor(api.search, q=topic + ' -filter:retweets', lang="en", tweet_mode='extended').items(number_of_tweets):
+        tweets_.append(tweet.full_text)
 
-# Actual Code
-tweets_ = []
-tweets = []
-y_pred = []
+    for i in range(len(tweets_)):
+        tweets_[i] = process_text(tweets_[i])
 
-for tweet in tweepy.Cursor(api.search, q=sys.argv[1] + ' -filter:retweets', lang="en", tweet_mode='extended').items(int(sys.argv[2])):
-    tweets_.append(tweet.full_text)
+    for i in range(len(tweets_)):
+        if sum(tweets_[i][0]) == 0:
+            continue
+        tweets.append(tweets_[i])
 
+    y_pred = []
 
-# In[4]:
+    for tweet in tweets:
+        y_pred.append(model.predict(tweet)[0][0])
 
+    result = ""
+    for i in y_pred:
+        result += "{:.2f},".format(i)
 
-for i in range(len(tweets_)):
-    tweets_[i] = process_text(tweets_[i])
-
-for i in range(len(tweets_)):
-    if sum(tweets_[i][0]) == 0:
-        continue
-    tweets.append(tweets_[i])
-
-# In[5]:
-
-
-y_pred = []
-
-for tweet in tweets:
-    y_pred.append(model.predict(tweet)[0][0])
-
-
-# In[6]:
-
-
-for i in y_pred:
-    print("{:.2f},".format(i), end='')
-
-
-# In[ ]:
+    return result

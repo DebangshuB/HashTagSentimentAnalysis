@@ -32,6 +32,7 @@ function myFunction() {
                     var arr = data.data;
                     arr = arr.split(",");
                     arr = arr.map(parseFloat);
+                    arr.pop();
 
                     var positives = 0;
                     var neutrals = 0;
@@ -53,7 +54,7 @@ function myFunction() {
                     }
 
                     var average_sentiment = sum_ele / count_ele;
-                    var sentiment_string = ""
+                    var sentiment_string = "ERROR"
 
                     if (average_sentiment <= 0.30)
                         sentiment_string = "Negative";

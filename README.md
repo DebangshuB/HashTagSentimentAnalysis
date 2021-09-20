@@ -9,10 +9,7 @@ Dataset used was the [Kaggle Sentiment140 Dataset ](https://www.kaggle.com/kazan
 ![](https://img.shields.io/badge/numpy-1.19.5-orange)
 ![](https://img.shields.io/badge/tweepy-3.10.0-lightgrey)
 ![](https://img.shields.io/badge/nltk-3.6.2-blue)
-![](https://img.shields.io/badge/node-14.16.0-brightgreen)
-![](https://img.shields.io/badge/npm-6.14.11-yellow)
-![](https://img.shields.io/badge/express-4.17.1-red)
-![](https://img.shields.io/badge/python--shell-3.0.0-orange)
+![](https://img.shields.io/badge/flask-1.1.2-red)
 
 
 ![](images/2.png)

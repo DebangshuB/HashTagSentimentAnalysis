@@ -2,6 +2,8 @@
 ## Introduction
 The model takes in a keyword or hashtag and returns the average sentiment around the given keyword / hashtag.
 
+Try it out for yourself at https://hastag-sentiment-analysis.herokuapp.com/.
+
 Dataset used was the [Kaggle Sentiment140 Dataset ](https://www.kaggle.com/kazanova/sentiment140) consisting of 1.6 million tweets. The model was developed and trained on Google Colab using thier GPUs. The Frontend and Backend of the web app were added subsequently.
 
 ![](https://img.shields.io/badge/python-3.8.11-brightgreen)
